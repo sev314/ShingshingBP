@@ -15,3 +15,9 @@ dev = [
     "ruff>=0.14.10",
     "ty>=0.0.7",
 ]
+
+[tool.ruff]
+line-length = 140
+
+[tool.ruff.format]
+line-ending = "auto"

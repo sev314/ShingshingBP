@@ -777,9 +777,14 @@ while tno <=end:
         html= html.decode('utf-8')
         f = open('C:/Users/%s/NCBP/CAFE/%d.html' % (username, int(tno)) , 'w' , encoding='UTF-8')
 
+        # NOTE:
+        # <iframe title="답변쓰기에디터" ...>는 게시글 본문이 아닌, 댓글(답글) 작성용 에디터 영역입니다.
+        # 이는 백업 대상이 아닌 불필요한 내용이므로, 저장된 HTML 파일을 열 때 해당 에디터 UI가 보이지 않도록 미리 제거합니다.
         html = html.replace(u'<iframe title="답변쓰기에디터"' , u'w')
 
+        # NOTE: 한글을 비롯한 UTF-8 문자들이 올바르게 렌더링되도록 하기 위한 조치입니다.
         html = html.replace('<meta name=\"robots\" content=\"noindex, nofollow\">' , '<meta charset=\"UTF-8\">' , 1)
+
         f.write(html)
         f.close()
         print("%d번 게시글 저장완료." % int(tno))

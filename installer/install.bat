@@ -38,7 +38,7 @@ IF NOT EXIST "programdata\WKhtmltopdf.exe" (
 	ECHO 압축상태에서 실행하시고 계시다면, 압축을 해제해 주세요.
 	ECHO 무시하고 진행하시려면, 아무 키나 누르세요.
 	PAUSE)
-	
+
 REM programdata폴더 내부 파일 존재여부 확인끝.
 
 
@@ -108,27 +108,27 @@ REM 프로그램초기화면
 TITLE install NCBP program.....
 CLS
 ECHO  ─────────────────────────────────────────────────────────────
-ECHO NNNNNNNN        NNNNNNNN       CCCCCCCCCCCCBBBBBBBBBBBBBBBBB  PPPPPPPPPPPPPPPPP   
-ECHO N:::::::N       N::::::N    CCC::::::::::::B::::::::::::::::B P::::::::::::::::P  
-ECHO N::::::::N      N::::::N  CC:::::::::::::::B::::::BBBBBB:::::BP::::::PPPPPP:::::P 
+ECHO NNNNNNNN        NNNNNNNN       CCCCCCCCCCCCBBBBBBBBBBBBBBBBB  PPPPPPPPPPPPPPPPP
+ECHO N:::::::N       N::::::N    CCC::::::::::::B::::::::::::::::B P::::::::::::::::P
+ECHO N::::::::N      N::::::N  CC:::::::::::::::B::::::BBBBBB:::::BP::::::PPPPPP:::::P
 ECHO N:::::::::N     N::::::N C:::::CCCCCCCC::::BB:::::B     B:::::PP:::::P     P:::::P
 ECHO N::::::::::N    N::::::NC:::::C       CCCCCC B::::B     B:::::B P::::P     P:::::P
 ECHO N:::::::::::N   N::::::C:::::C               B::::B     B:::::B P::::P     P:::::P
-ECHO N:::::::N::::N  N::::::C:::::C               B::::BBBBBB:::::B  P::::PPPPPP:::::P 
-ECHO N::::::N N::::N N::::::C:::::C               B:::::::::::::BB   P:::::::::::::PP  
-ECHO N::::::N  N::::N:::::::C:::::C               B::::BBBBBB:::::B  P::::PPPPPPPPP    
-ECHO N::::::N   N:::::::::::C:::::C               B::::B     B:::::B P::::P            
-ECHO N::::::N    N::::::::::C:::::C               B::::B     B:::::B P::::P            
-ECHO N::::::N     N:::::::::NC:::::C       CCCCCC B::::B     B:::::B P::::P            
-ECHO N::::::N      N::::::::N C:::::CCCCCCCC::::BB:::::BBBBBB::::::PP::::::PP          
-ECHO N::::::N       N:::::::N  CC:::::::::::::::B:::::::::::::::::BP::::::::P          
-ECHO N::::::N        N::::::N    CCC::::::::::::B::::::::::::::::B P::::::::P          
-ECHO NNNNNNNN         NNNNNNN       CCCCCCCCCCCCBBBBBBBBBBBBBBBBB  PPPPPPPPPP          
-ECHO.                                                          
+ECHO N:::::::N::::N  N::::::C:::::C               B::::BBBBBB:::::B  P::::PPPPPP:::::P
+ECHO N::::::N N::::N N::::::C:::::C               B:::::::::::::BB   P:::::::::::::PP
+ECHO N::::::N  N::::N:::::::C:::::C               B::::BBBBBB:::::B  P::::PPPPPPPPP
+ECHO N::::::N   N:::::::::::C:::::C               B::::B     B:::::B P::::P
+ECHO N::::::N    N::::::::::C:::::C               B::::B     B:::::B P::::P
+ECHO N::::::N     N:::::::::NC:::::C       CCCCCC B::::B     B:::::B P::::P
+ECHO N::::::N      N::::::::N C:::::CCCCCCCC::::BB:::::BBBBBB::::::PP::::::PP
+ECHO N::::::N       N:::::::N  CC:::::::::::::::B:::::::::::::::::BP::::::::P
+ECHO N::::::N        N::::::N    CCC::::::::::::B::::::::::::::::B P::::::::P
+ECHO NNNNNNNN         NNNNNNN       CCCCCCCCCCCCBBBBBBBBBBBBBBBBB  PPPPPPPPPP
+ECHO.
 ECHO                         IM - NCBP
 ECHO                 버전 0.3.9 (2022.02.08배포)
-ECHO	          Naver Cafe Backup Project/Program	                     
-ECHO           네이버 카페 백업 프로그램 설치를 시작합니다...         
+ECHO	          Naver Cafe Backup Project/Program
+ECHO           네이버 카페 백업 프로그램 설치를 시작합니다...
 ECHO  ─────────────────────────────────────────────────────────────
 REM 프로그램 설치의사 확인
 ECHO 아무 키나 눌러서 설치를 시작하세요.
@@ -188,7 +188,7 @@ IF NOT EXIST "C:\Users\%username%\NCBP\programdata\NCBP_WK.bat" (
 	ECHO 파일 복사 오류!
 	ECHO 설치오류! NCBP.NoNaver.Com에 있는 "오류>파일복사오류"항목을 참고하여 파일을 수동 이동하세요.
 	PAUSE)
-	
+
 IF NOT EXIST "C:\Users\%username%\NCBP\programdata\chromedriver_97.exe" (
 	ECHO 파일 복사 오류!
 	ECHO 설치오류! NCBP.NoNaver.Com에 있는 "오류>파일복사오류"항목을 참고하여 파일을 수동 이동하세요.
@@ -201,7 +201,7 @@ IF NOT EXIST "C:\Users\%username%\NCBP\programdata\chromedriver_99.exe" (
 	ECHO 파일 복사 오류!
 	ECHO 설치오류! NCBP.NoNaver.Com에 있는 "오류>파일복사오류"항목을 참고하여 파일을 수동 이동하세요.
 	PAUSE)
-	
+
 timeout 1
 ECHO.
 REM 2.프로그램 구동파일 이동완료

@@ -710,40 +710,9 @@ except:
     print("프로그램 초기화에 실패했습니다")
     print("Selenium 설치여부와 위치를 확인해주세요")
 
-
-# chromedriver로딩 시도. 먼저 87로 로딩 후, 88,89까지.
-try:
-    driver = webdriver.Chrome(executable_path="C:/Users/%s/NCBP/programdata/chromedriver_97.exe" % username)
-    driver.implicitly_wait(1)
-    driver.get("https://naver.com")
-
-except:
-    try:
-        time.sleep(3)
-
-        driver = webdriver.Chrome(executable_path="C:/Users/%s/NCBP/programdata/chromedriver_98.exe" % username)
-        driver.implicitly_wait(1)
-        driver.get("https://naver.com")
-
-    except:
-        try:
-            time.sleep(3)
-
-            driver = webdriver.Chrome(executable_path="C:/Users/%s/NCBP/programdata/chromedriver_99.exe" % username)
-            driver.implicitly_wait(1)
-            driver.get("https://naver.com")
-
-        except:
-            print("경고: 프로그램 실행과 초기화에 실패했습니다")
-            print("chrome설치여부와 버전을 확인해 주세요")
-            print("크롬을 실행하신 후 크롬 설정의 [Chrome 정보]를 누르면 크롬의 버전을 확인하실 수 있습니다.")
-            print("이 버전의 NCBP는 Chrome버젼 87,88,89를 지원하고 있습니다.")
-            print(
-                "크롬의 버전이 89보다 높다면, 프로그램의 업데이트가 필요한 것이므로 admin@nonaver.com으로 메일을 보내주시면 NCBP업데이트 조치하도록 하겠습니다"
-            )
-            print("Error: program halted because no supported Chrome version found")
-
-            time.sleep(10000)
+driver = webdriver.Edge()
+driver.implicitly_wait(1)
+driver.get("https://naver.com")
 
 if os.path.exists("C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe"):
     print("wkHTMLtoPDF가 설치되어 있습니다. 프로그램이 준비되었습니다")

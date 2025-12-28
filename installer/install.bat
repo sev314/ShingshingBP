@@ -1,46 +1,7 @@
 @ECHO OFF
-chcp 949
-CLS
-ECHO 프로그램 구동 시작중....
-ECHO install Naver Cafe Backup Program.....
-ECHO 이 프로그램의 저작권 규정은 GPL v3를 적용중입니다.
-timeout 2
 
-
-REM 0. --------------- programdata폴더 존재여부,실행가능여부 확인(파일존재여부,블랙리스트 확인)-----------------
-IF NOT EXIST "programdata" (
-	ECHO programdata 폴더를 이 배치파일과 같은 경로에 놓고 실행시켜 주세요!
-	ECHO 압축상태에서 실행하시고 계시다면, 압축을 해제해 주세요.
-	ECHO 무시하고 진행하시려면, 아무 키나 누르세요.
-	PAUSE)
-IF NOT EXIST "programdata\NCBP.bat" (
-	ECHO programdata 내부의 NCBP.bat 파일이 없으면 설치될 수 없습니다!
-	ECHO 압축상태에서 실행하시고 계시다면, 압축을 해제해 주세요.
-	ECHO 무시하고 진행하시려면, 아무 키나 누르세요.
-	PAUSE)
-IF NOT EXIST "programdata\NCBP.py" (
-	ECHO programdata 내부의 NCBP.py 파일이 없으면 설치될 수 없습니다!
-	ECHO 압축상태에서 실행하시고 계시다면, 압축을 해제해 주세요.
-	ECHO 무시하고 진행하시려면, 아무 키나 누르세요.
-	PAUSE)
-IF NOT EXIST "programdata\miniconda3.exe" (
-	ECHO programdata 내부의 miniconda3.exe 파일이 없으면 miniconda설치가 불가능합니다!
-	ECHO 압축상태에서 실행하시고 계시다면, 압축을 해제해 주세요.
-	ECHO 무시하고 진행하시려면, 아무 키나 누르세요.
-	PAUSE)
-IF NOT EXIST "programdata\NaverCafeBackupProgram.lnk" (
-	ECHO programdata 내부의 NaverCafeBackupProgram.lnk 파일이 없으면 설치될 수 없습니다!
-	ECHO 압축상태에서 실행하시고 계시다면, 압축을 해제해 주세요.
-	ECHO 무시하고 진행하시려면, 아무 키나 누르세요.
-	PAUSE)
-IF NOT EXIST "programdata\WKhtmltopdf.exe" (
-	ECHO programdata 내부의 WKhtmltopdf.exe 파일이 없으면 크롤링변환 프로그램 설치가 불가능합니다!
-	ECHO 압축상태에서 실행하시고 계시다면, 압축을 해제해 주세요.
-	ECHO 무시하고 진행하시려면, 아무 키나 누르세요.
-	PAUSE)
-
-REM programdata폴더 내부 파일 존재여부 확인끝.
-
+call :Startup
+call :Check_Required_Files
 
 REM 프로그램 설치여부 확인, 미설치시 설치.
 
@@ -223,8 +184,71 @@ pip install selenium
 pip install jupyter
 ECHO.
 
+goto :End
+
+:Startup
+
+CHCP 949
+CLS
+
+echo 프로그램 구동 시작중…
+echo 싱싱비피를 설치합니다…
+echo 이 프로그램은 GPL v3을 따릅니다.
+
+timeout 2
+exit /B 0
+
+:Check_Required_Files
+
+REM 0. --------------- programdata폴더 존재여부,실행가능여부 확인(파일존재여부,블랙리스트 확인)-----------------
+
+IF NOT EXIST "programdata" (
+	ECHO programdata 폴더를 이 배치파일과 같은 경로에 놓고 실행시켜 주세요!
+	ECHO 압축상태에서 실행하시고 계시다면, 압축을 해제해 주세요.
+	ECHO 무시하고 진행하시려면, 아무 키나 누르세요.
+	PAUSE
+)
+
+IF NOT EXIST "programdata\NCBP.bat" (
+	ECHO programdata 내부의 NCBP.bat 파일이 없으면 설치될 수 없습니다!
+	ECHO 압축상태에서 실행하시고 계시다면, 압축을 해제해 주세요.
+	ECHO 무시하고 진행하시려면, 아무 키나 누르세요.
+	PAUSE
+)
+
+IF NOT EXIST "programdata\NCBP.py" (
+	ECHO programdata 내부의 NCBP.py 파일이 없으면 설치될 수 없습니다!
+	ECHO 압축상태에서 실행하시고 계시다면, 압축을 해제해 주세요.
+	ECHO 무시하고 진행하시려면, 아무 키나 누르세요.
+	PAUSE
+)
+
+IF NOT EXIST "programdata\miniconda3.exe" (
+	ECHO programdata 내부의 miniconda3.exe 파일이 없으면 miniconda설치가 불가능합니다!
+	ECHO 압축상태에서 실행하시고 계시다면, 압축을 해제해 주세요.
+	ECHO 무시하고 진행하시려면, 아무 키나 누르세요.
+	PAUSE
+)
+
+IF NOT EXIST "programdata\NaverCafeBackupProgram.lnk" (
+	ECHO programdata 내부의 NaverCafeBackupProgram.lnk 파일이 없으면 설치될 수 없습니다!
+	ECHO 압축상태에서 실행하시고 계시다면, 압축을 해제해 주세요.
+	ECHO 무시하고 진행하시려면, 아무 키나 누르세요.
+	PAUSE
+)
+
+IF NOT EXIST "programdata\WKhtmltopdf.exe" (
+	ECHO programdata 내부의 WKhtmltopdf.exe 파일이 없으면 크롤링변환 프로그램 설치가 불가능합니다!
+	ECHO 압축상태에서 실행하시고 계시다면, 압축을 해제해 주세요.
+	ECHO 무시하고 진행하시려면, 아무 키나 누르세요.
+	PAUSE
+)
+
+REM programdata폴더 내부 파일 존재여부 확인끝.
+
+exit /B 0
+
+:End
 ECHO 설치가 완료되었습니다.
 ECHO 아무 키나 눌러서 창을 닫으세요.
 PAUSE
-
-

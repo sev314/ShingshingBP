@@ -1,5 +1,7 @@
 @ECHO OFF
 
+SetLocal
+
 call :Startup
 call :Check_Required_Files
 
@@ -184,9 +186,12 @@ pip install selenium
 pip install jupyter
 ECHO.
 
+EndLocal
+
 goto :End
 
 :Startup
+SetLocal
 
 @REM 한국어 Windows의 기본 콘솔 코드 페이지(CP949, 확장 완성형)를 활성화하여,
 @REM 배치 파일 내의 한글 텍스트(예: 에코 메시지)가 깨지지 않고 정상적으로 출력되게 만든다.
@@ -199,9 +204,11 @@ echo 싱싱비피를 설치합니다…
 echo 이 프로그램은 GPL v3을 따릅니다.
 
 timeout 2
+EndLocal
 exit /B 0
 
 :Check_Required_Files
+SetLocal
 
 REM 0. --------------- programdata폴더 존재여부,실행가능여부 확인(파일존재여부,블랙리스트 확인)-----------------
 
@@ -249,6 +256,7 @@ IF NOT EXIST "programdata\WKhtmltopdf.exe" (
 
 REM programdata폴더 내부 파일 존재여부 확인끝.
 
+EndLocal
 exit /B 0
 
 :End

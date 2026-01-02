@@ -698,6 +698,8 @@ SeleniumWebDriver = webdriver.Firefox | webdriver.Edge | webdriver.Chrome
 
 
 class BackupMan:
+    """네이버카페 게시글을 백업합니다."""
+
     driver: SeleniumWebDriver
 
     @property
@@ -705,6 +707,8 @@ class BackupMan:
         return getenv("USERNAME")
 
     def init(self) -> None:
+        """풀그림 실행에 필요한 초기 설정을 수행합니다."""
+
         ##-------프로그램 초기화--------
         print("프로그램 초기화중....")
 

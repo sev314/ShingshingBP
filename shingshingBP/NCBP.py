@@ -709,10 +709,7 @@ class BackupMan:
         print("프로그램 초기화중....")
 
         try:
-            # self.username = os.environ.get("USERNAME")
-
-            self.driver = webdriver.Edge()
-            self.driver.implicitly_wait(1)
+            self.init_webdriver()
             self.driver.get("https://naver.com")
 
             if os.path.exists("C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe"):
@@ -726,6 +723,10 @@ class BackupMan:
             print("Selenium 설치여부와 위치를 확인해주세요")
 
         ##--------초기화 끝----------------
+
+    def init_webdriver(self) -> None:
+        self.driver = webdriver.Edge()
+        self.driver.implicitly_wait(1)
 
     def run_backup(self) -> None:
         ##-------크롤링 사이트 로그인요청/사이트 지정----------------

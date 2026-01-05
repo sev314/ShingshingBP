@@ -689,6 +689,7 @@ Public License instead of this License.  But first, please read
 import os
 import subprocess
 import time
+from os import getenv
 
 import selenium
 from selenium import webdriver
@@ -697,7 +698,7 @@ SeleniumWebDriver = webdriver.Firefox | webdriver.Edge | webdriver.Chrome
 
 
 class BackupMan:
-    username: str | None
+
     driver: SeleniumWebDriver
 
     def init(self) -> None:
@@ -705,7 +706,7 @@ class BackupMan:
         print("프로그램 초기화중....")
 
         try:
-            self.username = os.environ.get("USERNAME")
+            # self.username = os.environ.get("USERNAME")
 
             self.driver = webdriver.Edge()
             self.driver.implicitly_wait(1)
@@ -722,6 +723,10 @@ class BackupMan:
             print("Selenium 설치여부와 위치를 확인해주세요")
 
         ##--------초기화 끝----------------
+
+    @property
+    def username(self) -> str | None:
+        return getenv("USERNAME")
 
     def run_backup(self) -> None:
         ##-------크롤링 사이트 로그인요청/사이트 지정----------------

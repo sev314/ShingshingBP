@@ -11,7 +11,7 @@ from selenium import webdriver
 
 from shingshingBP.crawling import crawl_posts
 
-from .types import SeleniumWebDriver = webdriver.Firefox | webdriver.Edge | webdriver.Chrome
+from .types import SeleniumWebDriver
 
 
 # 『Man』은 『매니저』라는 뜻이다.
@@ -74,60 +74,7 @@ class BackupMan:
         print("알림:사용자이름은 %s 입니다" % self.username)
         print("컴퓨터 설정이 완료되었습니다.")
 
-        # 본격 크롤링 시작.
-
-        tno = start
-
-        while tno <= end:
-            no = cafedir + "/" + str(tno)
-
-            self.driver.get(no)
-            time.sleep(int(sleeptime))
-
-            try:
-                alert = self.driver.switch_to.alert
-
-                alert.accept()
-                print("%d번 게시글은 존재하지 않음" % tno)
-
-                tno = tno + 1
-
-            except:
-                self.driver.switch_to.frame("cafe_main")
-
-                html = self.driver.page_source.encode("utf-8")
-                html = html.decode("utf-8")
-
-                f = open(
-                    "C:/Users/%s/NCBP/CAFE/%d.html" % (self.username, int(tno)),
-                    "w",
-                    encoding="UTF-8",
-                )
-
-                # NOTE:
-                # <iframe title="답변쓰기에디터" ...>는 게시글 본문이 아닌, 댓글(답글) 작성용 에디터 영역입니다.
-                # 이는 백업 대상이 아닌 불필요한 내용이므로, 저장된 HTML 파일을 열 때 해당 에디터 UI가 보이지 않도록 미리 제거합니다.
-                html = html.replace('<iframe title="답변쓰기에디터"', "w")
-
-                # NOTE: 한글을 비롯한 UTF-8 문자들이 올바르게 렌더링되도록 하기 위한 조치입니다.
-                html = html.replace(
-                    '<meta name="robots" content="noindex, nofollow">',
-                    '<meta charset="UTF-8">',
-                    1,
-                )
-
-                f.write(html)
-                f.close()
-                print("%d번 게시글 저장완료." % int(tno))
-                os.system(
-                    'start cmd /c start /d "C:/Program Files/wkhtmltopdf/bin/" /b wkhtmltopdf.exe --encoding UTF-8 C:/Users/%s/NCBP/CAFE/%d.html C:/Users/%s/NCBP/CAFE/%d.pdf'
-                    % (self.username, tno, self.username, tno)
-                )
-                print("%d번 게시글 변환요청 완료." % int(tno))
-
-                tno = tno + 1
-
-        print("크롤링이 완료되었습니다")
+        crawl_posts(self.username, cafedir, self.driver, start, end, float(sleeptime))
         os.system("start C:/Users/%s/NCBP/CAFE" % (self.username))
 
         print("크롤링 결과를 확인하세요. %d번 게시글 부터 %d번 게시글까지 크롤링되었습니다." % (start, end))

@@ -697,6 +697,7 @@ from selenium import webdriver
 SeleniumWebDriver = webdriver.Firefox | webdriver.Edge | webdriver.Chrome
 
 
+# 『Man』은 『매니저』라는 뜻이다.
 class BackupMan:
     """네이버카페 게시글을 백업합니다."""
 

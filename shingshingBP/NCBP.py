@@ -14,7 +14,7 @@ from shingshingBP.crawling import crawl_posts
 from .types import SeleniumWebDriver
 
 
-# 『Man』은 『매니저』라는 뜻이다.
+# 『Man』은 『남자』라는 뜻이 아니고 『매니저』라는 뜻이다.
 class BackupMan:
     """네이버카페 게시글을 백업합니다."""
 

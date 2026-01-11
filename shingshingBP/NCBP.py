@@ -698,8 +698,11 @@ SeleniumWebDriver = webdriver.Firefox | webdriver.Edge | webdriver.Chrome
 
 
 class BackupMan:
-
     driver: SeleniumWebDriver
+
+    @property
+    def username(self) -> str | None:
+        return getenv("USERNAME")
 
     def init(self) -> None:
         ##-------프로그램 초기화--------
@@ -723,10 +726,6 @@ class BackupMan:
             print("Selenium 설치여부와 위치를 확인해주세요")
 
         ##--------초기화 끝----------------
-
-    @property
-    def username(self) -> str | None:
-        return getenv("USERNAME")
 
     def run_backup(self) -> None:
         ##-------크롤링 사이트 로그인요청/사이트 지정----------------

@@ -1,7 +1,10 @@
+from __future__ import annotations
+
 import os
 import subprocess
 import time
 from os import getenv
+from typing import Self
 
 import selenium
 from selenium import webdriver
@@ -15,34 +18,35 @@ class BackupMan:
 
     driver: SeleniumWebDriver
 
+    def __init__(self, driver: SeleniumWebDriver):
+        self.driver = driver
+
     @property
     def username(self) -> str | None:
         return getenv("USERNAME")
 
-    def init(self) -> None:
+    @classmethod
+    def setup(cls) -> Self:
         """풀그림 실행에 필요한 초기 설정을 수행합니다."""
 
         ##-------프로그램 초기화--------
         print("프로그램 초기화중....")
 
-        try:
-            self.init_webdriver()
-            self.driver.get("https://naver.com")
+        backup_man = cls(webdriver.Edge())
+        backup_man.init_webdriver()
+        backup_man.driver.get("https://naver.com")
 
-            if os.path.exists("C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe"):
-                print("wkHTMLtoPDF가 설치되어 있습니다. 프로그램이 준비되었습니다")
-            else:
-                print("wkHTMLtoPDF가 없습니다. 준비되지 않았습니다. wkHTMLtoPDF를 재설치 하세요")
-                print("계속할수는 있지만 정상적으로 진행되지 않습니다.")
-
-        except:
-            print("프로그램 초기화에 실패했습니다")
-            print("Selenium 설치여부와 위치를 확인해주세요")
+        if os.path.exists("C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe"):
+            print("wkHTMLtoPDF가 설치되어 있습니다. 프로그램이 준비되었습니다")
+        else:
+            print("wkHTMLtoPDF가 없습니다. 준비되지 않았습니다. wkHTMLtoPDF를 재설치 하세요")
+            print("계속할수는 있지만 정상적으로 진행되지 않습니다.")
 
         ##--------초기화 끝----------------
 
+        return backup_man
+
     def init_webdriver(self) -> None:
-        self.driver = webdriver.Edge()
         self.driver.implicitly_wait(1)
 
     def run_backup(self) -> None:
@@ -135,7 +139,13 @@ def main() -> None:
 
     # -----------------------아래부터 프로그램 시작-----------------------------
 
-    backup_man = BackupMan()
+    try:
+        backup_man = BackupMan.setup()
 
-    backup_man.init()
+    except:
+        print("프로그램 초기화에 실패했습니다")
+        print("Selenium 설치여부와 위치를 확인해주세요")
+
+        return
+
     backup_man.run_backup()

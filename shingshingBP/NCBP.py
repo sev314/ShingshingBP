@@ -9,7 +9,9 @@ from typing import Self
 import selenium
 from selenium import webdriver
 
-SeleniumWebDriver = webdriver.Firefox | webdriver.Edge | webdriver.Chrome
+from shingshingBP.crawling import crawl_posts
+
+from .types import SeleniumWebDriver = webdriver.Firefox | webdriver.Edge | webdriver.Chrome
 
 
 # 『Man』은 『매니저』라는 뜻이다.

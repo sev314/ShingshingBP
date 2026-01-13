@@ -1,5 +1,5 @@
 [project]
-dependencies = ["selenium>=4.39.0"]
+dependencies = ["beautifulsoup4>=4.14.3", "selenium>=4.39.0"]
 description = "싱싱한 NCBP(네이버카페 백업 프로그램)"
 name = "ShingshingBP"
 readme = "README.md"

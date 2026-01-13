@@ -1,6 +1,8 @@
 import os
 import time
 
+from bs4 import BeautifulSoup
+
 from .types import SeleniumWebDriver
 
 
@@ -35,19 +37,7 @@ def crawl_posts(username: str | None, cafedir: str, driver: SeleniumWebDriver, s
                 encoding="UTF-8",
             )
 
-            # NOTE:
-            # <iframe title="답변쓰기에디터" ...>는 게시글 본문이 아닌, 댓글(답글) 작성용 에디터 영역입니다.
-            # 이는 백업 대상이 아닌 불필요한 내용이므로, 저장된 HTML 파일을 열 때 해당 에디터 UI가 보이지 않도록 미리 제거합니다.
-            html = html.replace('<iframe title="답변쓰기에디터"', "w")
-
-            # NOTE: 한글을 비롯한 UTF-8 문자들이 올바르게 렌더링되도록 하기 위한 조치입니다.
-            html = html.replace(
-                '<meta name="robots" content="noindex, nofollow">',
-                '<meta charset="UTF-8">',
-                1,
-            )
-
-            f.write(html)
+            f.write(clean_html(html))
             f.close()
             print("%d번 게시글 저장완료." % int(tno))
             os.system(
@@ -59,3 +49,24 @@ def crawl_posts(username: str | None, cafedir: str, driver: SeleniumWebDriver, s
             tno = tno + 1
 
     print("크롤링이 완료되었습니다")
+
+
+def clean_html(raw_html: str) -> str:
+    """불필요한 iframe을 제거하고 인코딩을 설정합니다."""
+
+    soup = BeautifulSoup(raw_html, "html.parser")
+
+    # NOTE:
+    # <iframe title="답변쓰기에디터" ...>는 게시글 본문이 아닌, 댓글(답글) 작성용 에디터 영역입니다.
+    # 이는 백업 대상이 아닌 불필요한 내용이므로, 저장된 HTML 파일을 열 때 해당 에디터 UI가 보이지 않도록 미리 제거합니다.
+
+    for iframe in soup.find_all("iframe", title="답변쓰기에디터"):
+        iframe.decompose()
+
+    # 메타 태그 교체 (Charset 설정)
+
+    if soup.head:
+        new_meta = soup.new_tag("meta", charset="UTF-8")
+        soup.head.insert(0, new_meta)
+
+    return soup.prettify()
